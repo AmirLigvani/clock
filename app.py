@@ -1,28 +1,23 @@
 from tkinter import *
 import time
+from Time import Time
 
 ui = Tk()
 ui.title("saat")
 ui.geometry('600x300')
+ui.configure(bg='black')
 
 
-def CurrentTime():
-    h = time.strftime('%I')
-    m = time.strftime("%M")
-    S = time.strftime("%S")
-    am_pm = time.strftime("%p")
-    week_day = time.strftime("%A")
-    day = time.strftime("%d")
-    txt = week_day + " " + day + "th" + "\n" + \
-        h + ":" + m + ":" + S + "" + "\n" + am_pm
-    label.config(text=txt)
-    label.after(1000, CurrentTime)
+def current_time():
+    t = Time(time)
+
+    label.config(
+        text=t.display())
+    label.after(1000, current_time)
 
 
-label = Label(ui, text="", font=(None, 62), fg='blue', bg='skyblue')
-
-label.pack()
-
-CurrentTime()
-
-ui.mainloop()
+if __name__ == "__main__":
+    label = Label(ui, text="", font=(None, 62), fg='white', bg='black')
+    label.pack(expand=True, fill=BOTH)
+    current_time()
+    ui.mainloop()
